@@ -48,10 +48,10 @@ def main():
             continue
         print()
         with open('txt-files/' + file.split('.')[0] + '.txt', 'w') as f:
-            jpg_files = sorted(list_files('jpg-files/' + file.split('.')[0]))
-            for jpg_file in jpg_files:
+            jpg_files = len(list_files('jpg-files/' + file.split('.')[0]))
+            for jpg_file in range(jpg_files):
                 print('convert jpg to txt file:', jpg_file)
-                txt = jpgtotxt.convert_jpg_to_txt('jpg-files/' + file.split('.')[0] + '/' + jpg_file)
+                txt = jpgtotxt.convert_jpg_to_txt('jpg-files/' + file.split('.')[0] + '/' + str(jpg_file) + '.jpg')
                 f.write(txt)
             print()
         print('\n')
