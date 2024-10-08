@@ -2,6 +2,7 @@ import pdftojpg
 import jpgtotxt
 from pathlib import Path
 import pytesseract # type: ignore
+import cv2
 
 def create_directory(directory_path):
     directory = Path(directory_path)
@@ -44,14 +45,22 @@ def main():
         print('convert jpg to txt file:', file, end=' ')
         already_convert = is_file_exist('txt-files', file.split('.')[0] + '.txt')
         if already_convert:
-            print('--> already convert')
+            print('--> already convert\n')
             continue
         print()
         with open('txt-files/' + file.split('.')[0] + '.txt', 'w') as f:
             jpg_files = len(list_files('jpg-files/' + file.split('.')[0]))
             for jpg_file in range(jpg_files):
                 print('convert jpg to txt file:', jpg_file)
-                txt = jpgtotxt.convert_jpg_to_txt('jpg-files/' + file.split('.')[0] + '/' + str(jpg_file) + '.jpg')
+
+                # improve the accuracy of OCR
+                img = cv2.imread('jpg-files/' + file.split('.')[0] + '/' + str(jpg_file) + '.jpg')
+
+                txt = jpgtotxt.convert_jpg_to_txt(img)
+                
+                # if is_noisy_line(txt): 
+                #     continue
+
                 f.write(txt)
             print()
         print('\n')
