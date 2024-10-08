@@ -4,7 +4,7 @@ import re
 from noisy import is_noisy_line
 
 # Creating a PDF reader object
-reader = PdfReader('test2.pdf')
+reader = PdfReader('test.pdf')
 
 # Printing number of pages in the PDF file
 print(f'Number of pages in the PDF: {len(reader.pages)}')
@@ -25,9 +25,7 @@ with open('ocr-output.txt', 'w', encoding='utf-8') as file:
             text = text.replace('  ', ' ')
             text = text.replace(' ้หนา', 'หน้า')
             text = text.replace('่เลม', 'เล่ม')
-            print(text)
             if is_noisy_line(text):
-                print(f"Noisy text found on page {page_number + 1}")
                 continue
             file.write(text + '\n')  # Write text and add a newline
         else:

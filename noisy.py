@@ -6,9 +6,9 @@ def is_noisy_line(line):
     # - Lines that are very short or fragmented
     # - Lines with mixed numbers and special characters
     noise_patterns = [
-        # r'^หน้า',
-        # r'^เล่ม',
-        r'^[0-9]',
+        r'^หน้า',
+        r'^เล่ม',
+        # r'^[0-9]',
         # r'[0-9]+', # lines with arabic numbers
         # r'\s{2,}',
         # r'^.{1,2}$',  # lines that are too short (less than 3 characters)
@@ -44,22 +44,11 @@ def clean_text_by_line(text):
     
     return cleaned_text
 
-with open('ocr-output.txt', 'r') as file:
-    text = file.read()
+# with open('ocr-output.txt', 'r') as file:
+#     text = file.read()
 
-# text = """
-# 423ซอยรัชดาภิเษก70 53,000
-# 424ซอยรัชดาภิเษก72 53,000
-# 425ซอยรัชดาภิเษก74 53,000
-# ล ำดับที่ ชื่อหน่วยที่ดินรำคำประเมิน
-# (บำท/ตำรำงวำ)
-# 426ซอยรัชดาภิเษก76 53,000
-# 427ซอยรัชดาภิเษก78 53,000
-# 428ซอยลาดพร้าว35แยก10 53,000
-# 429ซอยลาดพร้าว35แยก2-1 53,000"""
+# cleaned_text = clean_text_by_line(text)
 
-cleaned_text = clean_text_by_line(text)
-
-with open('cleaned-ocr-output.txt', 'w') as file:
-    file.write(cleaned_text)
+# with open('cleaned-ocr-output.txt', 'w') as file:
+#     file.write(cleaned_text)
 # print(clean_text_by_line(text))
